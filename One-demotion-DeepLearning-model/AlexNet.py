@@ -31,7 +31,6 @@ class AlexNet(torch.nn.Module):
            torch.nn.BatchNorm1d(256),
            torch.nn.ReLU(inplace=True),
            torch.nn.MaxPool1d(kernel_size=3, stride=2),
-   		#自适应平均池化不管输入多少输出一定为6
            torch.nn.AdaptiveAvgPool1d(6),
        )
 
