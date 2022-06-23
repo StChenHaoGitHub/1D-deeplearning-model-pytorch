@@ -1,4 +1,5 @@
 import torch
+from torchsummary import summary
 
 class Bottlrneck(torch.nn.Module):
     def __init__(self,In_channel,Med_channel,Out_channel,downsample=False):
@@ -33,7 +34,7 @@ class Bottlrneck(torch.nn.Module):
 
 
 class ResNet50(torch.nn.Module):
-    def __init__(self,in_channels=2,classes=5):
+    def __init__(self,in_channels=2,classes=125):
         super(ResNet50, self).__init__()
         self.features = torch.nn.Sequential(
             torch.nn.Conv1d(in_channels,64,kernel_size=7,stride=2,padding=3),
@@ -46,8 +47,12 @@ class ResNet50(torch.nn.Module):
             Bottlrneck(256,128,512, True),
             Bottlrneck(512,128,512, False),
             Bottlrneck(512,128,512, False),
+            Bottlrneck(512,128,512, False),
             #
             Bottlrneck(512,256,1024, True),
+            Bottlrneck(1024,256,1024, False),
+            Bottlrneck(1024,256,1024, False),
+            Bottlrneck(1024,256,1024, False),
             Bottlrneck(1024,256,1024, False),
             Bottlrneck(1024,256,1024, False),
             #
@@ -77,3 +82,4 @@ if __name__ == '__main__':
     print(f'输入尺寸为:{x.shape}')
     print(f'输出尺寸为:{output.shape}')
     print(model)
+    summary(model=model,input_size=(1,224),device='cpu')
