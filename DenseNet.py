@@ -1,5 +1,4 @@
 import torch
-from torchsummary import summary
 
 class DenseLayer(torch.nn.Module):
     def __init__(self,in_channels,middle_channels=128,out_channels=32):
@@ -96,6 +95,5 @@ if __name__ == '__main__':
     model = DenseNet(layer_num=(6,12,24,16),growth_rate=32,in_channels=1,classes=5)
     output = model(input)
     print(output.shape)
-    print(model)
-    summary(model=model, input_size=(1, 224), device='cpu')
+    
 

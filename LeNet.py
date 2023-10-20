@@ -30,10 +30,11 @@ class LeNet(torch.nn.Module):
        )
 
    def forward(self, x):
+       # check the dimensionality 
        # 检查输入样本维度是否有错误
        if x.size(1) != self.input_channels or x.size(2) != self.input_sample_points:
            raise Exception(
-               '输入数据维度错误,输入维度应为[Batch_size,{},{}],实际输入维度为{}'.format(self.input_channels, self.input_sample_points,x.size()))
+               'Input dimensionality is wrong,Input dimensionality should be [Batch_size,{},{}],Actually is {}'.format(self.input_channels, self.input_sample_points,x.size()))
 
        x = self.features(x)
        x = x.view(-1, self.After_features_channels * self.After_features_sample_points)
@@ -46,4 +47,4 @@ if __name__ == '__main__':
    input = torch.randn(size=(1, 1, 224))
    output = model(input)
    print(output.shape)
-   #torch.Size([1, 5])
+

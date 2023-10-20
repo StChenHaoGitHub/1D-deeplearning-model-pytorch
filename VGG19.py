@@ -1,12 +1,11 @@
 import torch
-from torchsummary import summary
 
 class VGG19(torch.nn.Module):
-    def __init__(self,In_channel=1,classes=5):
+    def __init__(self,in_channels=1,classes=5):
         super(VGG19, self).__init__()
         self.feature = torch.nn.Sequential(
 
-            torch.nn.Conv1d(In_channel, 64, kernel_size=3, padding=1),
+            torch.nn.Conv1d(in_channels, 64, kernel_size=3, padding=1),
             torch.nn.BatchNorm1d(64),
             torch.nn.ReLU(),
             torch.nn.Conv1d(64, 64, kernel_size=3, padding=1),
@@ -86,9 +85,8 @@ class VGG19(torch.nn.Module):
 
 
 if __name__ == '__main__':
-    model = VGG19(In_channel=1,classes=5)
+    model = VGG19(in_channels=1,classes=5)
     input = torch.randn(size=(1,1,224))
     output = model(input)
-    print(f"输出大小{output.shape}")
-    print(model)
-    summary(model=model, input_size=(1, 224), device='cpu')
+    print(output.shape)
+

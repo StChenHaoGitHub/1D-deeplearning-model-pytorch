@@ -54,4 +54,3 @@ if __name__ == '__main__':
    input = torch.randn(size=(1, 1, 224))
    output = model(input)
    print(output.shape)
-   #torch.Size([1, 5])

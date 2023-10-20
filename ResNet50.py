@@ -1,5 +1,4 @@
 import torch
-from torchsummary import summary
 
 class Bottlrneck(torch.nn.Module):
     def __init__(self,In_channel,Med_channel,Out_channel,downsample=False):
@@ -76,10 +75,9 @@ if __name__ == '__main__':
     x = torch.randn(size=(1,1,224))
     # x = torch.randn(size=(1,64,224))
     # model = Bottlrneck(64,64,256,True)
-    model = ResNet50(in_channels=1)
+    model = ResNet50(in_channels=1,classes=5)
 
     output = model(x)
-    print(f'输入尺寸为:{x.shape}')
-    print(f'输出尺寸为:{output.shape}')
-    print(model)
-    summary(model=model,input_size=(1,224),device='cpu')
+    print(output.shape)
+
+

@@ -1,15 +1,15 @@
 import torch
 
 class AlexNet(torch.nn.Module):
-   def __init__(self,input_channels,input_sample_points,classes):
+   def __init__(self,in_channels,classes,input_sample_points):
        super(AlexNet, self).__init__()
 
-       self.input_channels = input_channels
+       self.input_channels = in_channels
        self.input_sample_points = input_sample_points
 
        self.features = torch.nn.Sequential(
 
-           torch.nn.Conv1d(input_channels,64,kernel_size=11,stride=4,padding=2),
+           torch.nn.Conv1d(in_channels,64,kernel_size=11,stride=4,padding=2),
            torch.nn.BatchNorm1d(64),
            torch.nn.ReLU(inplace=True),
            #torch.nn.LocalResponseNorm(size=5, alpha=0.0001, beta=0.75, k=2),
@@ -49,8 +49,6 @@ class AlexNet(torch.nn.Module):
        )
 
    def forward(self,x):
-       if x.size(1)!=self.input_channels or x.size(2)!=self.input_sample_points:
-           raise Exception('输入数据维度错误,输入维度应为[Batch_size,{},{}],实际输入维度为{}'.format(self.input_channels,self.input_sample_points,x.size()))
 
        x = self.features(x)
        x = x.view(-1,1536)
@@ -59,8 +57,7 @@ class AlexNet(torch.nn.Module):
 
 
 if __name__ == '__main__':
-   model = AlexNet(input_channels=1, input_sample_points=224, classes=5)
+   model = AlexNet(in_channels=1, input_sample_points=224, classes=5)
    input = torch.randn(size=(1, 1, 224))
    output = model(input)
    print(output.shape)
-   #torch.Size([1, 5])
