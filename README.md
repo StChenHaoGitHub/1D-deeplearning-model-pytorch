@@ -4,7 +4,7 @@ To do a deep learning project on ecg. I use pytorch to reproduce the traditional
 In order to understand models easily, I',m not copy  the Official routines,but reprodece the models by myself.Therefore it’s easy to carry out secondary developmet on codes.  
 If you can access VPN in China,Here are some websites for detialed steps of reproducing these models.These websites  are written by me in chinese.  
 
-
+Please copy it to your chrome instead of just click it.
 [chen-hao.blog.csdn.net](chen-hao.blog.csdn.net)
 
 
